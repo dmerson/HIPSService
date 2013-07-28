@@ -5,22 +5,23 @@ namespace HIPSService
 {
     public partial class Default : Page
     {
-        public int FirstThree(string SSN)
+       
+        public int PinFunction(string SSN) //you can change this and leave everything else.
         {
             return int.Parse(SSN.Substring(0, 3));
         }
 
-        public DateTime AddValue(DateTime dateToUser, int daysToAdd)
+        public DateTime MakeNewDobFunction(DateTime dateToUser, int daysToAdd)
         {
             return dateToUser.AddDays(daysToAdd) ;
         }
 
-        public int DateDifference(DateTime orignal, DateTime newDate)
+        public int StampFunction(DateTime orignal, DateTime newDate)
         {
             return int.Parse((orignal - newDate).TotalDays.ToString());
         }
 
-        public string SpinSSN(string ssn, int spinNumber)
+        public string MakeNewSsnFunction(string ssn, int spinNumber)
         {
             return (int.Parse(ssn) + spinNumber).ToString();
         }
@@ -47,9 +48,12 @@ namespace HIPSService
             DateTime dob = DateTime.Parse(txtDOB.Value);
             DateTime key = DateTime.Parse(txtKeys.Value);
            
-            var basic = new BasicHIPS(BasicHIPS.EncryptionDirection.Encrypt, ssn, dob, key, FirstThree, AddValue, 
-                                      DateDifference, SpinSSN, DecryptDOB,
-                                              DecryptSSN);
+            var basic = new BasicHIPS(BasicHIPS.EncryptionDirection.Encrypt, ssn, dob, key, PinFunction,
+                                       MakeNewDobFunction, 
+                                      StampFunction,
+                                      MakeNewSsnFunction,
+                                      DecryptDOB,
+                                      DecryptSSN);
             this.spanPin.InnerHtml = basic.RealizedPin.ToString();
             this.spanStamp.InnerHtml = basic.Stamp.ToString();
             this.spanFullObjectDOB.InnerHtml = basic.FakeDateOfBirth.ToShortDateString();

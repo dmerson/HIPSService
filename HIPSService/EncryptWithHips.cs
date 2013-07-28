@@ -37,7 +37,7 @@ namespace HIPSService
         public BasicHIPS(EncryptionDirection whichWay, string ssn, DateTime dateOfBirth, DateTime key,
             Func<string, int> pinFunction, 
             Func<DateTime, int, DateTime> makeNewDateOfBirthFunction,
-             Func<DateTime, DateTime, int> stampFunction,
+            Func<DateTime, DateTime, int> stampFunction,
             Func<string, int, string> makeNewSsnFunction,
             Func<DateTime, int, DateTime> getOldDateOfBirthFunction,
             Func<string, DateTime, DateTime, string> getOldSsnFunction)
