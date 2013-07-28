@@ -51,9 +51,9 @@ namespace HIPSService
                         this.RealSSN = ssn;
                         this.RealDateOfBirth = dateOfBirth;
                         RealizedPin = pinFunction(ssn);
-                        FakeDateOfBirth = makeNewDateOfBirthFunction(dateOfBirth, RealizedPin);
+                        FakeDateOfBirth = makeNewDateOfBirthFunction(RealDateOfBirth, RealizedPin);
                         Stamp = stampFunction(FakeDateOfBirth, Key);
-                        FakeSSN = makeNewSsnFunction(ssn, Stamp);
+                        FakeSSN = makeNewSsnFunction(RealSSN, Stamp);
                         VerifyDateOfBirth = getOldDateOfBirthFunction(FakeDateOfBirth, RealizedPin);
                         VerifySSN = getOldSsnFunction(FakeSSN, FakeDateOfBirth, key);
                         if (VerifyDateOfBirth != RealDateOfBirth)
@@ -74,9 +74,10 @@ namespace HIPSService
                         this.FakeDateOfBirth = dateOfBirth;
                         this.FakeSSN = ssn;
                         RealizedPin = pinFunction(ssn);
-                        RealDateOfBirth = getOldDateOfBirthFunction(dateOfBirth, RealizedPin);
-                        RealSSN = getOldSsnFunction(ssn, dateOfBirth, key);
-                        VerifyDateOfBirth=makeNewDateOfBirthFunction(RealDateOfBirth, RealizedPin);
+                        RealDateOfBirth = getOldDateOfBirthFunction(FakeDateOfBirth, RealizedPin);
+                        RealSSN = getOldSsnFunction(FakeSSN, FakeDateOfBirth, key);
+                        VerifyDateOfBirth = makeNewDateOfBirthFunction(RealDateOfBirth, RealizedPin);
+                        Stamp = stampFunction(FakeDateOfBirth, Key);
                         VerifySSN = makeNewSsnFunction(RealSSN, Stamp);
                         if (VerifyDateOfBirth != FakeDateOfBirth)
                         {
@@ -84,10 +85,10 @@ namespace HIPSService
                         }
                         else
                         {
-                            //if (VerifySSN != FakeSSN)
-                            //{
-                            //    throw new Exception("The ssn function is not working");
-                            //}
+                            if (VerifySSN != FakeSSN)
+                            {
+                                throw new Exception("The ssn function is not working");
+                            }
                         }
                         break;
                     }
