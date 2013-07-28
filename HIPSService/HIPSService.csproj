@@ -57,10 +57,23 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="BasicHips.asmx" />
+    <Content Include="CallWebService.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BasicHips.asmx.cs">
+      <DependentUpon>BasicHips.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CallWebService.aspx.cs">
+      <DependentUpon>CallWebService.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CallWebService.aspx.designer.cs">
+      <DependentUpon>CallWebService.aspx</DependentUpon>
+    </Compile>
     <Compile Include="EncryptWithHips.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
