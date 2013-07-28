@@ -17,16 +17,7 @@ namespace HIPSService
         public int Stamp { get; set; }
         public string NewSSN { get; set; }
 
-        //private int GetRealizedKey(string ssn, Func<string, int> KeyFunction)
-        //{
-        //    return KeyFunction(ssn);
-        //}
-
-        //private DateTime GetNewDateFunc(DateTime realdate, int changeValue,
-        //                                Func<DateTime, int, DateTime> NewDateFunction)
-        //{
-        //    return NewDateFunction(realdate, changeValue);
-        //}
+        
     }
 
 
@@ -40,9 +31,13 @@ namespace HIPSService
         {
             return KeyFunction(ssn);
         }
-        public DecryptWithHIPS(string encryptedSSN, DateTime encryptedDOB,Func<string, int> PinFunction )
+        public DecryptWithHIPS(string encryptedSSN, DateTime encryptedDOB, DateTime key, Func<string, int> PinFunction, Func<DateTime,int,DateTime> GetOldDateOfBirthFunction, Func<string,DateTime, DateTime,string> GetOldSSNFunction   )
         {
             RealizedPin = PinFunction(encryptedSSN);
+            RealDateOfBirth = GetOldDateOfBirthFunction(encryptedDOB, RealizedPin);
+            RealSSN = GetOldSSNFunction(encryptedSSN, encryptedDOB, key);
+
+
         }
     }
 }
