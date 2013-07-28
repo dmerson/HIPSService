@@ -67,15 +67,6 @@ namespace HIPSService {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl spanPin;
         
         /// <summary>
-        /// spanNewDOB control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl spanNewDOB;
-        
-        /// <summary>
         /// spanStamp control.
         /// </summary>
         /// <remarks>
@@ -83,33 +74,6 @@ namespace HIPSService {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl spanStamp;
-        
-        /// <summary>
-        /// spanNewSSNs control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl spanNewSSNs;
-        
-        /// <summary>
-        /// spanOldDOB control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl spanOldDOB;
-        
-        /// <summary>
-        /// spanOldSSN control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl spanOldSSN;
         
         /// <summary>
         /// spanFullObjectSSN control.

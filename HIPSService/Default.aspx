@@ -24,24 +24,9 @@
             Pin:<span id="spanPin" runat="server"></span>
 
         </div>
-        <div >
-            New DOB:<span id="spanNewDOB" runat="server"></span>
-
-        </div>
+       
         <div >
             Stamp:<span id="spanStamp" runat="server"></span>
-
-        </div>
-        <div >
-            New SSN:<span id="spanNewSSNs" runat="server"></span>
-
-        </div>
-        <div >
-            Unencrypt DOB:<span id="spanOldDOB" runat="server"></span>
-
-        </div>
-        <div >
-            Unencrypt SSN:<span id="spanOldSSN" runat="server"></span>
 
         </div>
         <div >

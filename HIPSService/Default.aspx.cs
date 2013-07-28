@@ -7,12 +7,12 @@ namespace HIPSService
     {
         public int FirstThree(string SSN)
         {
-            return int.Parse(SSN.Substring(0, 3));
+            return int.Parse(SSN.Substring(0, 2));
         }
 
         public DateTime AddValue(DateTime dateToUser, int daysToAdd)
         {
-            return dateToUser.AddDays(daysToAdd);
+            return dateToUser.AddDays(daysToAdd) ;
         }
 
         public int DateDifference(DateTime orignal, DateTime newDate)
@@ -46,18 +46,12 @@ namespace HIPSService
             string ssn = txtSSN.Value;
             DateTime dob = DateTime.Parse(txtDOB.Value);
             DateTime key = DateTime.Parse(txtKeys.Value);
-            var encrypt = new EncryptWithHips(ssn, dob, FirstThree, AddValue, key, DateDifference, SpinSSN);
-            var decrypt = new DecryptWithHIPS(encrypt.NewSSN, encrypt.NewDateOfBirth, key, FirstThree, DecryptDOB,
-                                              DecryptSSN);
-            spanPin.InnerHtml = encrypt.RealizedPin.ToString();
-            spanNewDOB.InnerHtml = encrypt.NewDateOfBirth.ToShortDateString();
-            spanStamp.InnerHtml = encrypt.Stamp.ToString();
-            spanNewSSNs.InnerHtml = encrypt.NewSSN;
-            spanOldSSN.InnerHtml = decrypt.RealSSN;
-            spanOldDOB.InnerHtml = decrypt.RealDateOfBirth.ToShortDateString();
+           
             var basic = new BasicHIPS(BasicHIPS.EncryptionDirection.Encrypt, ssn, dob, key, FirstThree, AddValue, key,
                                       DateDifference, SpinSSN, DecryptDOB,
                                               DecryptSSN);
+            this.spanPin.InnerHtml = basic.RealizedPin.ToString();
+            this.spanStamp.InnerHtml = basic.Stamp.ToString();
             this.spanFullObjectDOB.InnerHtml = basic.FakeDateOfBirth.ToShortDateString();
             this.spanFullObjectSSN.InnerHtml = basic.FakeSSN;
             this.spanFullObjectRealSSN.InnerHtml = basic.RealSSN;
