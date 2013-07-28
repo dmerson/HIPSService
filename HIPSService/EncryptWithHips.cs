@@ -23,12 +23,12 @@ namespace HIPSService
        public DateTime VerifyDateOfBirth { get; set; }
        
         public BasicHIPS(EncryptionDirection whichWay, string ssn, DateTime dateOfBirth, DateTime key,
-            Func<string, int> PinFunction,
-            Func<DateTime, int, DateTime> MakeNewDateOfBirthFunction,
-            DateTime Key, Func<DateTime, DateTime, int> StampFunction,
-            Func<string, int, string> MakeNewSSNFunction,
-            Func<DateTime, int, DateTime> GetOldDateOfBirthFunction,
-            Func<string, DateTime, DateTime, string> GetOldSSNFunction)
+            Func<string, int> pinFunction,
+            Func<DateTime, int, DateTime> makeNewDateOfBirthFunction,
+            DateTime Key, Func<DateTime, DateTime, int> stampFunction,
+            Func<string, int, string> makeNewSsnFunction,
+            Func<DateTime, int, DateTime> getOldDateOfBirthFunction,
+            Func<string, DateTime, DateTime, string> getOldSsnFunction)
         {
             CurrentDirection = whichWay;
             Key = key;
@@ -38,23 +38,23 @@ namespace HIPSService
                     {
                         this.RealSSN = ssn;
                         this.RealDateOfBirth = dateOfBirth;
-                        RealizedPin = PinFunction(ssn);
-                        FakeDateOfBirth = MakeNewDateOfBirthFunction(dateOfBirth, RealizedPin);
-                        Stamp = StampFunction(FakeDateOfBirth, Key);
-                        FakeSSN = MakeNewSSNFunction(ssn, Stamp);
-                        VerifyDateOfBirth = GetOldDateOfBirthFunction(FakeDateOfBirth, RealizedPin);
-                        VerifySSN = GetOldSSNFunction(FakeSSN, FakeDateOfBirth, key);
+                        RealizedPin = pinFunction(ssn);
+                        FakeDateOfBirth = makeNewDateOfBirthFunction(dateOfBirth, RealizedPin);
+                        Stamp = stampFunction(FakeDateOfBirth, Key);
+                        FakeSSN = makeNewSsnFunction(ssn, Stamp);
+                        VerifyDateOfBirth = getOldDateOfBirthFunction(FakeDateOfBirth, RealizedPin);
+                        VerifySSN = getOldSsnFunction(FakeSSN, FakeDateOfBirth, key);
                         break;
                     }
                 case EncryptionDirection.Decrypt:
                     {
                         this.FakeDateOfBirth = dateOfBirth;
                         this.FakeSSN = ssn;
-                        RealizedPin = PinFunction(ssn);
-                        RealDateOfBirth = GetOldDateOfBirthFunction(dateOfBirth, RealizedPin);
-                        RealSSN = GetOldSSNFunction(ssn, dateOfBirth, key);
-                        FakeDateOfBirth = MakeNewDateOfBirthFunction(RealDateOfBirth, RealizedPin);
-                        FakeSSN = MakeNewSSNFunction(RealSSN, Stamp);
+                        RealizedPin = pinFunction(ssn);
+                        RealDateOfBirth = getOldDateOfBirthFunction(dateOfBirth, RealizedPin);
+                        RealSSN = getOldSsnFunction(ssn, dateOfBirth, key);
+                        FakeDateOfBirth = makeNewDateOfBirthFunction(RealDateOfBirth, RealizedPin);
+                        FakeSSN = makeNewSsnFunction(RealSSN, Stamp);
                         break;
                     }
                 default:

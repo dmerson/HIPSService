@@ -7,7 +7,7 @@ namespace HIPSService
     {
         public int FirstThree(string SSN)
         {
-            return int.Parse(SSN.Substring(0, 2));
+            return int.Parse(SSN.Substring(0, 3));
         }
 
         public DateTime AddValue(DateTime dateToUser, int daysToAdd)
