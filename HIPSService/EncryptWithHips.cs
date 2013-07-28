@@ -60,6 +60,8 @@ namespace HIPSService
        public DateTime Key { get; set; }
        public int RealizedPin { get; set; }
        public int Stamp { get; set; }
+       public string VerifySSN { get; set; }
+       public DateTime VerifyDateOfBirth { get; set; }
        
         public BasicHIPS(EncryptionDirection whichWay, string ssn, DateTime dateOfBirth, DateTime key,
             Func<string, int> PinFunction,
@@ -81,6 +83,8 @@ namespace HIPSService
                         FakeDateOfBirth = MakeNewDateOfBirthFunction(dateOfBirth, RealizedPin);
                         Stamp = StampFunction(FakeDateOfBirth, Key);
                         FakeSSN = MakeNewSSNFunction(ssn, Stamp);
+                        VerifyDateOfBirth = GetOldDateOfBirthFunction(FakeDateOfBirth, RealizedPin);
+                        VerifySSN = GetOldSSNFunction(FakeSSN, FakeDateOfBirth, key);
                         break;
                     }
                 case EncryptionDirection.Decrypt:
@@ -90,6 +94,8 @@ namespace HIPSService
                         RealizedPin = PinFunction(ssn);
                         RealDateOfBirth = GetOldDateOfBirthFunction(dateOfBirth, RealizedPin);
                         RealSSN = GetOldSSNFunction(ssn, dateOfBirth, key);
+                        FakeDateOfBirth = MakeNewDateOfBirthFunction(RealDateOfBirth, RealizedPin);
+                        FakeSSN = MakeNewSSNFunction(RealSSN, Stamp);
                         break;
                     }
                 default:
@@ -97,6 +103,18 @@ namespace HIPSService
                         throw new Exception("No direction is coded");
                     }
             }
+            if (VerifyDateOfBirth != RealDateOfBirth)
+            {
+                throw new Exception("The date of birth function is not working");
+            }
+            else
+            {
+                if (VerifySSN != RealSSN)
+                {
+                    throw new Exception("The ssn function is not working");
+                }
+            }
+       
 
         }
     }
