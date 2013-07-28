@@ -65,7 +65,9 @@ namespace HIPSService
             Func<string, int> PinFunction,
             Func<DateTime, int, DateTime> MakeNewDateOfBirthFunction,
             DateTime Key, Func<DateTime, DateTime, int> StampFunction,
-            Func<string, int, string> MakeNewSSNFunction)
+            Func<string, int, string> MakeNewSSNFunction,
+            Func<DateTime, int, DateTime> GetOldDateOfBirthFunction,
+            Func<string, DateTime, DateTime, string> GetOldSSNFunction)
         {
             CurrentDirection = whichWay;
             Key = key;
@@ -85,6 +87,9 @@ namespace HIPSService
                     {
                         this.FakeDateOfBirth = dateOfBirth;
                         this.FakeSSN = ssn;
+                        RealizedPin = PinFunction(ssn);
+                        RealDateOfBirth = GetOldDateOfBirthFunction(dateOfBirth, RealizedPin);
+                        RealSSN = GetOldSSNFunction(ssn, dateOfBirth, key);
                         break;
                     }
                 default:

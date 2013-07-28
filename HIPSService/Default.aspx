@@ -52,6 +52,14 @@
             Full Object Encrypt DOB:<span id="spanFullObjectDOB" runat="server"></span>
 
         </div>
+        <div >
+            Full Object Decrypt SSN:<span id="spanFullObjectRealSSN" runat="server"></span>
+
+        </div>
+        <div >
+            Full Object Decrypt DOB:<span id="spanFullObjectRealDOB" runat="server"></span>
+
+        </div>
 
     </form>
 </body>

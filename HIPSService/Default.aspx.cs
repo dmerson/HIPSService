@@ -56,9 +56,12 @@ namespace HIPSService
             spanOldSSN.InnerHtml = decrypt.RealSSN;
             spanOldDOB.InnerHtml = decrypt.RealDateOfBirth.ToShortDateString();
             var basic = new BasicHIPS(BasicHIPS.EncryptionDirection.Encrypt, ssn, dob, key, FirstThree, AddValue, key,
-                                      DateDifference, SpinSSN);
+                                      DateDifference, SpinSSN, DecryptDOB,
+                                              DecryptSSN);
             this.spanFullObjectDOB.InnerHtml = basic.FakeDateOfBirth.ToShortDateString();
             this.spanFullObjectSSN.InnerHtml = basic.FakeSSN;
+            this.spanFullObjectRealSSN.InnerHtml = basic.RealSSN;
+            this.spanFullObjectRealDOB.InnerHtml = basic.RealDateOfBirth.ToShortDateString();
         }
 
         protected void btnGenerate_Click(object sender, EventArgs e)
