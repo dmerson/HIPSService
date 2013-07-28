@@ -45,6 +45,14 @@
             Full Object Decrypt DOB:<span id="spanFullObjectRealDOB" runat="server"></span>
 
         </div>
+        <div >
+            Full Object Verify SSN:<span id="spanVerifySSN" runat="server"></span>
+
+        </div>
+        <div >
+            Full Object Verify DOB:<span id="spanVerifyDOB" runat="server"></span>
+
+        </div>
 
     </form>
 </body>

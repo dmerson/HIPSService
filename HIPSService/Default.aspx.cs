@@ -8,7 +8,8 @@ namespace HIPSService
        
         public int PinFunction(string SSN) //you can change this and leave everything else.
         {
-            return int.Parse(SSN.Substring(0, 3));
+            
+            return int.Parse(SSN.Substring(0, 1));
         }
 
         public DateTime MakeNewDobFunction(DateTime dateToUser, int daysToAdd)
@@ -48,7 +49,7 @@ namespace HIPSService
             DateTime dob = DateTime.Parse(txtDOB.Value);
             DateTime key = DateTime.Parse(txtKeys.Value);
            
-            var basic = new BasicHIPS(BasicHIPS.EncryptionDirection.Encrypt, ssn, dob, key, PinFunction,
+            var basic = new BasicHIPS(BasicHIPS.EncryptionDirection.Decrypt, ssn, dob, key, PinFunction,
                                        MakeNewDobFunction, 
                                       StampFunction,
                                       MakeNewSsnFunction,
@@ -60,6 +61,8 @@ namespace HIPSService
             this.spanFullObjectSSN.InnerHtml = basic.FakeSSN;
             this.spanFullObjectRealSSN.InnerHtml = basic.RealSSN;
             this.spanFullObjectRealDOB.InnerHtml = basic.RealDateOfBirth.ToShortDateString();
+            this.spanVerifyDOB.InnerHtml = basic.VerifyDateOfBirth.ToShortDateString();
+            this.spanVerifySSN.InnerHtml = basic.VerifySSN;
         }
 
         protected void btnGenerate_Click(object sender, EventArgs e)

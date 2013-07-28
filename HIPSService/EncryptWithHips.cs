@@ -56,6 +56,17 @@ namespace HIPSService
                         FakeSSN = makeNewSsnFunction(ssn, Stamp);
                         VerifyDateOfBirth = getOldDateOfBirthFunction(FakeDateOfBirth, RealizedPin);
                         VerifySSN = getOldSsnFunction(FakeSSN, FakeDateOfBirth, key);
+                        if (VerifyDateOfBirth != RealDateOfBirth)
+                        {
+                            throw new Exception("The date of birth function is not working");
+                        }
+                        else
+                        {
+                            if (VerifySSN != RealSSN)
+                            {
+                                throw new Exception("The ssn function is not working");
+                            }
+                        }
                         break;
                     }
                 case EncryptionDirection.Decrypt:
@@ -65,8 +76,19 @@ namespace HIPSService
                         RealizedPin = pinFunction(ssn);
                         RealDateOfBirth = getOldDateOfBirthFunction(dateOfBirth, RealizedPin);
                         RealSSN = getOldSsnFunction(ssn, dateOfBirth, key);
-                        FakeDateOfBirth = makeNewDateOfBirthFunction(RealDateOfBirth, RealizedPin);
-                        FakeSSN = makeNewSsnFunction(RealSSN, Stamp);
+                        VerifyDateOfBirth=makeNewDateOfBirthFunction(RealDateOfBirth, RealizedPin);
+                        VerifySSN = makeNewSsnFunction(RealSSN, Stamp);
+                        if (VerifyDateOfBirth != FakeDateOfBirth)
+                        {
+                            throw new Exception("The date of birth function is not working");
+                        }
+                        else
+                        {
+                            //if (VerifySSN != FakeSSN)
+                            //{
+                            //    throw new Exception("The ssn function is not working");
+                            //}
+                        }
                         break;
                     }
                 default:
@@ -74,17 +96,7 @@ namespace HIPSService
                         throw new Exception("No direction is coded");
                     }
             }
-            if (VerifyDateOfBirth != RealDateOfBirth)
-            {
-                throw new Exception("The date of birth function is not working");
-            }
-            else
-            {
-                if (VerifySSN != RealSSN)
-                {
-                    throw new Exception("The ssn function is not working");
-                }
-            }
+            
        
 
         }
