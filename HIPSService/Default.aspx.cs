@@ -47,7 +47,7 @@ namespace HIPSService
             DateTime dob = DateTime.Parse(txtDOB.Value);
             DateTime key = DateTime.Parse(txtKeys.Value);
            
-            var basic = new BasicHIPS(BasicHIPS.EncryptionDirection.Encrypt, ssn, dob, key, FirstThree, AddValue, key,
+            var basic = new BasicHIPS(BasicHIPS.EncryptionDirection.Encrypt, ssn, dob, key, FirstThree, AddValue, 
                                       DateDifference, SpinSSN, DecryptDOB,
                                               DecryptSSN);
             this.spanPin.InnerHtml = basic.RealizedPin.ToString();
