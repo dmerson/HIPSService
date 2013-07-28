@@ -41,7 +41,15 @@
 
         </div>
         <div >
-            Unencrypt AAN:<span id="spanOldSSN" runat="server"></span>
+            Unencrypt SSN:<span id="spanOldSSN" runat="server"></span>
+
+        </div>
+        <div >
+            Full Object Encrypt SSN:<span id="spanFullObjectSSN" runat="server"></span>
+
+        </div>
+        <div >
+            Full Object Encrypt DOB:<span id="spanFullObjectDOB" runat="server"></span>
 
         </div>
 
