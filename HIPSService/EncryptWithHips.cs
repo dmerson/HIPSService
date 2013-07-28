@@ -4,12 +4,16 @@ namespace HIPSService
 {
     public class EncryptWithHips
     {
-        public EncryptWithHips(string ssn, DateTime dateOfBirth, Func<string, int> PinFunction, Func<DateTime, int, DateTime> MakeNewSSNFunction, DateTime Key, Func<DateTime, DateTime, int> StampFunction, Func<string, int, string> SpinFunction)
+        public EncryptWithHips(string ssn, DateTime dateOfBirth, 
+            Func<string, int> PinFunction, 
+            Func<DateTime, int, DateTime> MakeNewDateOfBirthFunction, 
+            DateTime Key, Func<DateTime, DateTime, int> StampFunction,
+            Func<string, int, string> MakeNewSSNFunction)
         {
             RealizedPin = PinFunction(ssn );
-            NewDateOfBirth = MakeNewSSNFunction(dateOfBirth, RealizedPin );
+            NewDateOfBirth = MakeNewDateOfBirthFunction(dateOfBirth, RealizedPin );
             Stamp = StampFunction(NewDateOfBirth, Key);
-            NewSSN = SpinFunction(ssn, Stamp);
+            NewSSN = MakeNewSSNFunction(ssn, Stamp);
         }
 
         public int RealizedPin { get; set; }

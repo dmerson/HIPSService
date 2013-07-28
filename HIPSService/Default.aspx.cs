@@ -24,17 +24,42 @@ namespace HIPSService
         {
             return (int.Parse(ssn) + spinNumber).ToString();
         }
+        public DateTime DecryptDOB(DateTime newDOB, int pin)
+        {
+            return newDOB.AddDays(-pin);
+        }
+        public string DecryptSSN(string newSSN, DateTime newDOB, DateTime Stamp)
+        {
+            double toSubtractFromSSN = (newDOB - Stamp).TotalDays;
+            return (int.Parse(newSSN) - toSubtractFromSSN).ToString();
+        }
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            var ssn = "216821211";
-            var encrypt = new EncryptWithHips(ssn, new DateTime(1991, 1, 2), FirstThree, AddValue, new DateTime(1991, 1, 1), DateDifference, SpinSSN);
-            Response.Write(ssn + "<br>");
-            Response.Write(encrypt.RealizedPin +"<br>");
-            Response.Write(encrypt.NewDateOfBirth + "<br>");
-            Response.Write(encrypt.Stamp + "<br>");
-            
-            Response.Write(encrypt.NewSSN + "<br>");
+            RunPage();
+
+        }
+
+        private void RunPage()
+        {
+            var ssn = this.txtSSN.Value;
+            var dob = DateTime.Parse(this.txtDOB.Value);
+            var key = DateTime.Parse(this.txtKeys.Value);
+            var encrypt = new EncryptWithHips(ssn, dob, FirstThree, AddValue, key, DateDifference, SpinSSN);
+            var decrypt = new DecryptWithHIPS(encrypt.NewSSN, encrypt.NewDateOfBirth, key, FirstThree, DecryptDOB,
+                                              DecryptSSN);
+            this.spanPin.InnerHtml = encrypt.RealizedPin.ToString();
+            this.spanNewDOB.InnerHtml = encrypt.NewDateOfBirth.ToShortDateString();
+            this.spanStamp.InnerHtml = encrypt.Stamp.ToString();
+            this.spanNewSSNs.InnerHtml = encrypt.NewSSN;
+            //this.spanOldDOB.InnerHtml = DecryptDOB(encrypt.NewDateOfBirth, encrypt.RealizedPin).ToShortDateString();
+            //this.spanOldSSN.InnerHtml = DecryptSSN(encrypt.NewSSN, encrypt.NewDateOfBirth, key);
+
+        }
+
+        protected void btnGenerate_Click(object sender, EventArgs e)
+        {
+            RunPage();
         }
     }
 }
