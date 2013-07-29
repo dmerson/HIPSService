@@ -5,9 +5,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
-    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-    <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script src="Scripts/jquery-2.0.3.js"></script>
     <script>
+        
         function encryptService()
         {
             dta = "{ssn:'" + $( "#txtSSN" ).val() + "',dob:'" + $( "#txtDOB" ).val() + "'}";
