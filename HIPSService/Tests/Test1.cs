@@ -48,6 +48,7 @@ namespace HIPSService.Tests
         #region SetUp / TearDown
 
         private BasicHIPS encrypt;
+        private BasicHIPS decrypt;
         private string ssn;
         private DateTime dob;
         private DateTime key;
@@ -64,6 +65,12 @@ namespace HIPSService.Tests
                                       MakeNewSsnFunction,
                                       DecryptDOB,
                                       DecryptSSN);
+             decrypt = new BasicHIPS(BasicHIPS.EncryptionDirection.Decrypt, ssn, dob, key, PinFunction,
+                                        MakeNewDobFunction,
+                                       StampFunction,
+                                       MakeNewSsnFunction,
+                                       DecryptDOB,
+                                       DecryptSSN);
             
         }
 
@@ -76,13 +83,28 @@ namespace HIPSService.Tests
         #region Tests
 
         [Test]
-        public void Test()
+        public void TestEncrypt()
         {
             Assert.IsNotNull(encrypt);
             Assert.AreEqual(ssn, encrypt.RealSSN);
             Assert.AreEqual(dob, encrypt.RealDateOfBirth);
             Assert.AreEqual("123456424", encrypt.FakeSSN);
-            
+            Assert.AreEqual(new DateTime(1990,1,2), encrypt.FakeDateOfBirth);
+            Assert.AreEqual(ssn, encrypt.VerifySSN);
+            Assert.AreEqual(dob, encrypt.VerifyDateOfBirth);
+
+        }
+        [Test]
+        public void TestDecrypt()
+        {
+            Assert.IsNotNull(decrypt);
+            Assert.AreEqual(ssn, decrypt.FakeSSN);
+            Assert.AreEqual(dob, decrypt.FakeDateOfBirth);
+            Assert.AreEqual("123457155", decrypt.RealSSN);
+            Assert.AreEqual(new DateTime(1989, 12, 31), decrypt.RealDateOfBirth);
+            Assert.AreEqual(ssn, decrypt.VerifySSN);
+            Assert.AreEqual(dob, decrypt.VerifyDateOfBirth);
+
         }
 
         #endregion
