@@ -1,18 +1,29 @@
 HIPSService
 ===========
 HIPS is Hide-in-plain-sight encryption. 
+
 Tenets of HIPS methodology
+
 Encrypted data should look like real data
+
 Must have key to unencrypt
+
 Key is ambiguous
+
 Key must not exist with data and vice versa
+
 Each row must do one of the following:
+
 Encrypt itself
+
 Point to row without the correct value
+
 
 For more details please the ppt in the root folder.
 
+
 The most basic type is encrypting the DOB with SSN and the SSN with the DOB.
+
 
 The first part is a component to create this basic enryption without a lot of work.
 
