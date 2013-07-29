@@ -1,5 +1,8 @@
 HIPSService
 ===========
+This software has a Creative Commons (c) license.
+It is free for non commerical uses only. Any commercial development must obtain a licensing fee.
+
 HIPS is Hide-in-plain-sight encryption. 
 
 Tenets of HIPS methodology
