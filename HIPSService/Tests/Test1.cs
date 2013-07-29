@@ -5,7 +5,7 @@ using System.Text;
 using System.Web.Mvc;
 using NUnit.Framework;
 
-namespace HIPSService.Controllers
+namespace HIPSService.Tests
 {
     [TestFixture]
     public class BasicHipsTest
@@ -80,6 +80,9 @@ namespace HIPSService.Controllers
         {
             Assert.IsNotNull(encrypt);
             Assert.AreEqual(ssn, encrypt.RealSSN);
+            Assert.AreEqual(dob, encrypt.RealDateOfBirth);
+            Assert.AreEqual("123456424", encrypt.FakeSSN);
+            
         }
 
         #endregion
